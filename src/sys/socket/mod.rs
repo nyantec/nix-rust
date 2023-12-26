@@ -918,7 +918,7 @@ impl ControlMessageOwned {
                 let timestamping = Timestamps { system, hw_trans, hw_raw };
                 ControlMessageOwned::ScmTimestampsns(timestamping)
             }
-            #[cfg(any(target_os = "freebsd", linux_android, apple_targets))]
+            #[cfg(any(target_os = "freebsd", target_os = "netbsd", linux_android, apple_targets))]
             #[cfg(feature = "net")]
             (libc::IPPROTO_IPV6, libc::IPV6_PKTINFO) => {
                 let info = unsafe { ptr::read_unaligned(p as *const libc::in6_pktinfo) };
